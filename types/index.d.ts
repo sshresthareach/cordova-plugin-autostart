@@ -1,26 +1,13 @@
-/**
- *
- * */
-export interface Window {
-    cordova : {
-        plugins: {
-            autoStart : AutoStartInterface
-        }
-    }
+// Type definitions for cordova.plugins.autoStart
+
+/// <reference types="cordova"/>
+
+interface AutoStartInterface {
+    enable(): void;
+    enableService(id: string): void;
+    disable(): void;
 }
-/**
- *
- * */
-export interface AutoStartInterface {
-    enable() : never;
-    enableService(id: string) : never;
-    disable() : never;
+
+interface CordovaPlugins {
+    autoStart: AutoStartInterface;
 }
-/**
- *
- * */
-export declare var cordova : {
-    plugins:{
-        autoStart : AutoStartInterface
-    }
-};
