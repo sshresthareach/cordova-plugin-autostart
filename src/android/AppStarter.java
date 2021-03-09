@@ -6,7 +6,7 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.content.SharedPreferences;
 import com.tonikorin.cordova.plugin.autostart.AutoStart;
-// import android.util.Log;
+import android.util.Log;
 
 public class AppStarter {
 
@@ -19,7 +19,8 @@ public class AppStarter {
 
     public void run(Context context, Intent intent, int componentState, boolean onAutostart) {
         // Enable or Disable UserPresentReceiver (or bypass the modification)
-        //Log.d("Cordova AppStarter", "UserPresentReceiver component, new state:" + String.valueOf(componentState));
+        Log.d("REACHLog", "Running app starter")
+        // Log.d("Cordova AppStarter", "UserPresentReceiver component, new state:" + String.valueOf(componentState));
         if( componentState != BYPASS_USERPRESENT_MODIFICATION ) {
             ComponentName receiver = new ComponentName(context, UserPresentReceiver.class);
             PackageManager pm = context.getPackageManager();
@@ -32,7 +33,7 @@ public class AppStarter {
         String packageName = context.getPackageName();
         String activityClassName = sp.getString(AutoStart.ACTIVITY_CLASS_NAME, "");
         if( !activityClassName.equals("") ){
-            //Log.d("Cordova AppStarter", className);
+            // Log.d("REACHLog", "activityClassName: " + activityClassName);
             Intent activityIntent = new Intent();
             activityIntent.setClassName(
                 context, String.format("%s.%s", packageName, activityClassName));
@@ -44,7 +45,8 @@ public class AppStarter {
             context.startActivity(activityIntent);
         }
         // Start a service in the background.
-        String serviceClassName = sp.getString(AutoStart.SERVICE_CLASS_NAME, "");
+        String serviceClassName = sp.getString(AutoStart.SERVICE_CLASS_NAME, "cordovaReachAutoStart.service");
+        // Log.d("REACHLog", "serviceClassName: " + serviceClassName);
         String servicePackageName = serviceClassName.substring(0, serviceClassName.lastIndexOf("."));
         if ( !serviceClassName.equals("") ) {
             Intent serviceIntent = new Intent();
